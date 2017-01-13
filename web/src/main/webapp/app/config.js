@@ -1,0 +1,1 @@
+var restInterface="http://localhost:8080/pa165/rest";

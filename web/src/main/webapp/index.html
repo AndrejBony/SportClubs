@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>Sports Club</title>
+    <!-- dependencies -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-theme.css" rel="stylesheet">
+    <script src="assets/libs/angular/angular.min.js"></script>
+    <script src="assets/libs/angular/angular-ui-router.min.js"></script>
+    <script src="assets/libs/ui-bootstrap-tpls-2.3.1.min.js"></script>
+<script src="assets/libs/angular-jwt.min.js"></script>
+    <!-- source files -->
+    <link href="assets/css/app.css" rel="stylesheet">
+    <script src="app/app.module.js"></script>
+    <script src="app/app.routes.js"></script>
+    <script src="app/config.js"></script>
+    <script src="app/components/home/homeCtrl.js"></script>
+    <script src="app/components/adminBoard/adminBoardCtrl.js"></script>
+    <script src="app/components/managerModal/managerModalCtrl.js"></script>
+    <script src="app/components/managerBoard/managerBoardCtrl.js"></script>
+    <script src="app/components/newTeamModal/newTeamModalCtrl.js"></script>
+    <script src="app/components/suitablePlayersModal/suitablePlayersModalCtrl.js"></script>
+    <script src="app/components/playerModal/playerModalCtrl.js"></script>
+</head>
+<body ng-app="sportsClub">
+<div class="container">
+    <img alt="Sports Clubs" src="assets/img/header.png" id="header">
+    <div ui-view></div>
+</div>
+</body>
+</html>
