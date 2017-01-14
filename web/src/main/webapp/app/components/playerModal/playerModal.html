@@ -26,8 +26,12 @@
     <div class="form-group">
         <label class="col-sm-3 control-label">Date of Birth</label>
         <div class="col-sm-9">
-            <input required type="text"
-                   placeholder ="dd.mm.yyyy"
+            <input required type="date"
+                   value="{{player.dateOfBirth}}"
+                   max="2004-01-01"
+                   validatedateformat 
+                   data-date-format="yyyy-MM-dd"
+                   maxlength="10" 
                    class="form-control"
                    ng-model="player.dateOfBirth">
         </div>
