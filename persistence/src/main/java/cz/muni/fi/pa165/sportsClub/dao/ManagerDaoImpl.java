@@ -118,11 +118,10 @@ public class ManagerDaoImpl implements ManagerDao{
 	@Override
 	public List<Player> getPlayersWithDobBetween(Team team,LocalDate bottomLimit, LocalDate upperLimit) {
 		TypedQuery<Player> query = em.createQuery(
-				"SELECT p FROM Player p " +
+				"SELECT distinct p FROM Player p " +
 						"LEFT JOIN p.playerInfos pi " +
-						"JOIN pi.team t " +
 						"WHERE p.manager = :manager " +
-						"AND ((t.category <> :category) OR (t is null)) " +
+						"AND ((pi.team is null) OR (pi.team.category <> :category)) " +
 						"AND p.dateOfBirth > :bottomLimit " +
 						"AND p.dateOfBirth <= :upperLimit",
 				Player.class);

@@ -1,3 +1,6 @@
+To use curl commands you have to pass Authorization header with token.
+
+use: -H "Authorization:	Bearer xxx" in each curl request. Use correct authorization token value instead of 'xxx'. You can obtain it eg. by login call with correct data.
 ------------
 MANAGER REST
 ------------

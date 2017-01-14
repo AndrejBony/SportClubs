@@ -22,7 +22,6 @@ angular.module('sportsClub').controller("homeCtrl",function($scope,$http,$state,
 				$scope.data.email="";
 				return;
 			}
-				$rootScope.user = response.data.user;
 				sessionStorage.setItem("jwt", response.data.token);
 				sessionStorage.setItem("userId", response.data.manager.id);
 				if(response.data.manager.role=="manager"){

@@ -206,7 +206,7 @@ public class ManagerTest {
 	}
 
 	@Test
-	public void getPlayersWithDobBetweenTest() {
+	public void getPlayersWithHigherDobThan() {
 		managerDao.createManager(manager);
 		assertNotNull(manager.getId());
 		playerDao.createPlayer(player1);
@@ -230,18 +230,18 @@ public class ManagerTest {
 		playerInfo1.setJerseyNumber(14);
 		playerInfoDao.createPlayerInfo(playerInfo1);
 
-//		PlayerInfo playerInfo2 = new PlayerInfo();
-//		playerInfo2.setPlayer(player3);
-//		playerInfo2.setTeam(team2);
-//		playerInfo2.setJerseyNumber(14);
-//		playerInfoDao.createPlayerInfo(playerInfo2);
+		PlayerInfo playerInfo2 = new PlayerInfo();
+		playerInfo2.setPlayer(player3);
+		playerInfo2.setTeam(team2);
+		playerInfo2.setJerseyNumber(14);
+		playerInfoDao.createPlayerInfo(playerInfo2);
 
 		LocalDate bottomLimit = LocalDate.parse("1995-06-15");
 		LocalDate upperLimit = LocalDate.parse("1999-06-15");
-		List<Player> suitablePlayers = managerDao.getPlayersWithDobBetween(team1, bottomLimit, upperLimit);
+		List<Player> freePlayers = managerDao.getPlayersWithDobBetween(team1, bottomLimit, upperLimit);
 
-		assertEquals(1, suitablePlayers.size());
-		assertEquals(player3, suitablePlayers.get(0));
+		assertEquals(1, freePlayers.size());
+		assertEquals(player3, freePlayers.get(0));
 	}
 
 	@Test
