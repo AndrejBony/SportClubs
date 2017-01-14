@@ -1,5 +1,5 @@
 "use strict";
-angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $http, $uibModalInstance, player, team, managerId, playerTeams) {
+angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $http, $filter ,$uibModalInstance, player, team, managerId, playerTeams) {
     if (player != null) {
         $scope.player = angular.copy(player);
     } else {
@@ -37,6 +37,9 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
     $scope.close = function (updatedData) {
         $uibModalInstance.close(updatedData);
     }
+    var validDateOfBirth = function() {
+        $scope.player.dateOfBirth = $filter('date')($scope.player.dateOfBirth, "yyyy-MM-dd");
+    }
 
     $scope.save = function () {
         if (!validFirstName()) {
@@ -51,6 +54,7 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
         if (!validMobile()) {
             return;
         }
+        validDateOfBirth();
         if ($scope.player.id != null) {
             updatePlayer($scope.player);
             return;
