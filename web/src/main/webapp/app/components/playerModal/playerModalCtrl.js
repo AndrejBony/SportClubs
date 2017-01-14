@@ -1,5 +1,5 @@
 "use strict";
-angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $http, $uibModalInstance, player, team, managerId) {
+angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $http, $uibModalInstance, player, team, managerId, playerTeams) {
     if (player != null) {
         $scope.player = angular.copy(player);
     } else {
@@ -28,6 +28,10 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
 
     if (managerId != null) {
         $scope.managerId = angular.copy(managerId);
+    }
+
+    if (playerTeams != null) {
+        $scope.playerTeams = angular.copy(playerTeams);
     }
 
     $scope.close = function (updatedData) {

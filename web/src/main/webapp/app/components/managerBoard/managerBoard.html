@@ -59,7 +59,7 @@
             <td>{{playerInfo.firstName}}</td>
             <td>{{playerInfo.lastName}}</td>
             <td>
-                <button ng-click="editPlayer()" type="submit" class="btn btn-primary">Edit</button>
+                <button ng-click="openPlayerModal(playerInfo,null,null)" type="submit" class="btn btn-primary">Edit</button>
             </td>
             <td>
                 <button ng-click="deletePlayer(playerInfo.id)" type="submit" class="btn btn-danger">Delete</button>

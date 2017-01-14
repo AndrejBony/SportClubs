@@ -73,10 +73,10 @@ public class PlayerController {
     }
 
 	@RequestMapping(path = "/{playerId}/teams", method = RequestMethod.GET)
-	public List<TeamOfPlayerDto> getTeamsOfPlayer(@PathVariable("playerId") long id, HttpServletRequest hsr)
+	public List<TeamOfPlayerDto> getTeamsOfPlayer(@PathVariable("playerId") long playerId, HttpServletRequest hsr)
 			throws TokenValidationException {
 		String token = (hsr.getHeader("Authorization")).split(" ")[1];
 		AuthUtils.authorizeRestCall(token, AUTHORIZED_ROLES);
-		return playerFacade.getTeamsOfPlayer(id);
+		return playerFacade.getTeamsOfPlayer(playerId);
 	}
 }

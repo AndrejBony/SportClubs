@@ -76,35 +76,22 @@
                    ng-model="player.mobile">
         </div>
     </div>
-    <!--
+    <br>
+    <h4>Player's teams</h4>
     <div class="form-group">
         <table class="table">
             <tbody>
                 <tr>
                     <th>Category</th>
                     <th>Jersey Number</th>
-                    <th>asign</th>
                 </tr>
-                <tr ng-repeat="team in teams">
-                    <td>{{ team.name}}</td>
-                    <td><input type="number"
-                               ng-min="1"
-                               ng-max="99"
-                               class="form-control"
-                               ng-model="jersey.jersey"
-                               onchange="checkNumber(this.value)">
-                    </td>
-                    <td><input type="checkbox"
-                               ng-model="checkboxModel.asign"
-                               value="{{selectedTeam}}"
-                               ng-click="toggleSelection(selectedTeam)">
-                    </td>
+                <tr ng-repeat="playerTeam in playerTeams">
+                    <td>{{playerTeam.team.category}}</td>
+                    <td>{{playerTeam.jerseyNumber}}</td>
                 </tr>
-
             </tbody>
         </table>
     </div>
-    -->
     <br/>
     <div class="form-group modal-footer">
         <button type="Submit" class="btn btn-primary" ng-click="save()">Save</button>
