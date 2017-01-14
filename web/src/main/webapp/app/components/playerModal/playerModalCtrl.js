@@ -1,9 +1,9 @@
 "use strict";
-angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $http, $uibModalInstance, data) {
-    if (data != null) {
-        $scope.data = angular.copy(data);
+angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $http, $uibModalInstance, player, team, managerId) {
+    if (player != null) {
+        $scope.player = angular.copy(player);
     } else {
-        $scope.data = {
+        $scope.player = {
             "id": null,
             "firstName": null,
             "lastName": null,
@@ -13,8 +13,21 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
             "mobile": null,
             "weight": null,
             "heigth": null,
-            "manager_id": null
         }
+    }
+
+    if (team != null) {
+        $scope.team = angular.copy(team);
+    } else {
+        $scope.team = {
+            "id": null,
+            "category": null,
+            "manager": null,
+        }
+    }
+
+    if (managerId != null) {
+        $scope.managerId = angular.copy(managerId);
     }
 
     $scope.close = function (updatedData) {
@@ -34,15 +47,19 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
         if (!validMobile()) {
             return;
         }
-        if ($scope.data.id != null) {
-            updatePlayer($scope.data);
+        if ($scope.player.id != null) {
+            updatePlayer($scope.player);
             return;
         }
-        createPlayer($scope.data);
+        if ($scope.team.id != null) {
+            createPlayer($scope.player);
+            return;
+        }
+        createFreePlayer($scope.player,managerId);
     }
 
     var validFirstName = function () {
-        if ($scope.data.firstName == null) {
+        if ($scope.player.firstName == null) {
             alert("First name's field is empty");
             return false;
         }
@@ -50,7 +67,7 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
     }
 
     var validLastName = function () {
-        if ($scope.data.lastName == null) {
+        if ($scope.player.lastName == null) {
             alert("Last name's field is empty");
             return false;
         }
@@ -59,7 +76,7 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
 
     var validEmail = function () {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!re.test($scope.data.email)) {
+        if (!re.test($scope.player.email)) {
             alert("Invalid email format");
             return false;
         }
@@ -67,22 +84,34 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
     }
 
     var validMobile = function () {
-        if (!(/^(\+|00)?\d+$/.test($scope.data.mobile))) {
+        if (!(/^(\+|00)?\d+$/.test($scope.player.mobile))) {
             alert("Invalid mobile phone format");
             return false;
         }
         return true;
     }
 
-    var createPlayer = function (player) {
-        $http.post(restInterface + '/playerInfo/{teamId}/{jerseyNumber}', player).then(
+    var createPlayer = function (player, teamId, jerseyNumber) {
+        $http.post(restInterface + '/playerInfo/' + teamId + '/' + jerseyNumber, player).then(
                 function (response) {
-                    alert("Player created");
+                    alert("Player created and assigned to the team");
                     $scope.close({"new": true, "data": response.data});
                 },
                 function (err) {
                     $scope.handleErrors(err);
                 }
+        );
+    }
+
+    var createFreePlayer = function (player, managerId) {
+        $http.post(restInterface + "/player/" + managerId, player).then(
+            function (response) {
+                alert("Player created");
+                $scope.close({"new": true, "data": response.data});
+            },
+            function (err) {
+                $scope.handleErrors(err);
+            }
         );
     }
 

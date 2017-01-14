@@ -25,13 +25,19 @@ angular.module("sportsClub").controller('suitablePlayersModalCtrl',function($sco
         );
     }
 
-    $scope.newPlayerModal = function(playerData){
+    $scope.newPlayerModal = function(){
         var modalInstance = $uibModal.open({
             templateUrl: 'app/components/playerModal/playerModal.html',
             controller: 'playerModalCtrl',
             resolve: {
-                data: function () {
-                    return playerData;
+                player: function () {
+                    return null;
+                },
+                team: function () {
+                    return null;
+                },
+                managerId: function () {
+                    return null;
                 }
             }
         });

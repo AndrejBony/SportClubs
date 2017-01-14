@@ -18,6 +18,9 @@
     <button ng-hide="displayingTeam==null"type="button" class="btn btn-success" ng-click="openSuitablePlayersModal()">
         <span class="glyphicon glyphicon-plus"></span>
     </button>
+    <button ng-hide="displayingTeam!=null"type="button" class="btn btn-success" ng-click="openPlayerModal(null,null,managerId)">
+        <span class="glyphicon glyphicon-plus"></span>
+    </button>
 </h1>
 <button type="button" id="logout" class="btn pull-right" ng-click="logout()">Log Out
         <span class="glyphicon glyphicon-off"></span>
@@ -36,7 +39,7 @@
             <td>{{playerInfo.player.firstName}}</td>
             <td>{{playerInfo.player.lastName}}</td>
             <td>
-                <button ng-click="editPlayer(playerInfo.player)" type="submit" class="btn btn-primary">Edit</button>
+                <button ng-click="openPlayerModal(playerInfo.player,null,null)" type="submit" class="btn btn-primary">Edit</button>
             </td>
             <td>
                 <button ng-click="removePlayerFromRoster(playerInfo.playerInfoId)" type="submit" class="btn btn-primary">Remove</button>
@@ -53,7 +56,6 @@
         </thead>
         <tbody>
         <tr ng-repeat="playerInfo in playerInfos">
-        <td></td>
             <td>{{playerInfo.firstName}}</td>
             <td>{{playerInfo.lastName}}</td>
             <td>

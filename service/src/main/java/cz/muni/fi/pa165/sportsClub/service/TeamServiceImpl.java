@@ -83,7 +83,6 @@ public class TeamServiceImpl implements TeamService {
         LocalDate birthday = player.getDateOfBirth();
 
         int age = Period.between(birthday, today).getYears();
-        team.getCategory().getUpperAgeLimit();
         return age <= team.getCategory().getUpperAgeLimit() && age >= team.getCategory().getBottomAgeLimit();
     }
 

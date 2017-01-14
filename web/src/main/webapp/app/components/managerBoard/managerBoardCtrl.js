@@ -89,17 +89,26 @@ angular.module("sportsClub").controller('managerBoardCtrl', function ($scope, $h
                 });
     }
 
-    $scope.editPlayer = function (playerData) {
+    $scope.openPlayerModal = function (playerData, teamData, managerId) {
         var modalInstance = $uibModal.open({
             templateUrl: 'app/components/playerModal/playerModal.html',
             controller: 'playerModalCtrl',
             resolve: {
-                data: function () {
+                player: function () {
                     return playerData;
+                },
+                team: function () {
+                    return teamData;
+                },
+                managerId: function () {
+                    return managerId;
                 }
             }
         });
         modalInstance.result.then(function (updatedData) {
+            if(updatedData.new==true){
+                $scope.playerInfos.push(updatedData.data);
+            }
             if(updatedData.edited == true) {
                 for(var i =0;i<$scope.playerInfos.length;i++) {
                     if ($scope.playerInfos[i].player.id == updatedData.data.id) {

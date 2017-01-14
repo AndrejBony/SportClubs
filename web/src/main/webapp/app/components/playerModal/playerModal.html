@@ -9,7 +9,7 @@
             <input type="text"
                    placeholder ="First name"
                    class="form-control"
-                   ng-model="data.firstName"
+                   ng-model="player.firstName"
                    required>
         </div>
     </div>
@@ -19,7 +19,7 @@
             <input type="text"
                    placeholder ="Last name"
                    class="form-control"
-                   ng-model="data.lastName" 
+                   ng-model="player.lastName"
                    required>
         </div>
     </div>
@@ -29,7 +29,7 @@
             <input required type="text"
                    placeholder ="dd.mm.yyyy"
                    class="form-control"
-                   ng-model="data.dateOfBirth">
+                   ng-model="player.dateOfBirth">
         </div>
     </div>
     <div class="form-group">
@@ -38,7 +38,7 @@
             <input type="email"
                    placeholder ="email@email.com"
                    class="form-control"
-                   ng-model="data.email"
+                   ng-model="player.email"
                    required
                    onchange="checkEmail(this.value)">
         </div>
@@ -49,7 +49,7 @@
             <input type="number"
                    placeholder ="100"
                    class="form-control"
-                   ng-model="data.weight"
+                   ng-model="player.weight"
                    ng-min="20"
                    ng-max="150"
                    required>
@@ -61,7 +61,7 @@
             <input type="number"
                    placeholder ="180"
                    class="form-control"
-                   ng-model="data.height"
+                   ng-model="player.height"
                    ng-min="75"
                    ng-max="250"
                    required>
@@ -73,7 +73,7 @@
             <input type="text"
                    placeholder ="123456789"
                    class="form-control"
-                   ng-model="data.mobile">
+                   ng-model="player.mobile">
         </div>
     </div>
     <!--

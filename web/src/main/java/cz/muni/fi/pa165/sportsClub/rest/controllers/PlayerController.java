@@ -40,12 +40,12 @@ public class PlayerController {
         playerFacade.deletePlayer(playerId);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-	public PlayerDto create(@Valid @RequestBody PlayerDto player, HttpServletRequest hsr)
+    @RequestMapping(value = "/{managerId}", method = RequestMethod.POST)
+	public PlayerDto create(@PathVariable("managerId") long managerId, @Valid @RequestBody PlayerDto player, HttpServletRequest hsr)
 			throws TokenValidationException {
 		String token = (hsr.getHeader("Authorization")).split(" ")[1];
 		AuthUtils.authorizeRestCall(token, AUTHORIZED_ROLES);
-        playerFacade.createPlayer(player);
+        playerFacade.createPlayer(player, managerId);
         return player;
     }
 

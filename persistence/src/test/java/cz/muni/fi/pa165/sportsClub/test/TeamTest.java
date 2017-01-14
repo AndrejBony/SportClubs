@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import cz.muni.fi.pa165.sportsClub.dao.ManagerDao;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,8 +38,6 @@ import cz.muni.fi.pa165.sportsClub.pojo.Team;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
-@Transactional
-@Rollback(false)
 public class TeamTest {
 
 	@PersistenceContext
@@ -53,11 +52,16 @@ public class TeamTest {
 	@Inject
 	private PlayerDao playerDao;
 
+	@Inject
+	private ManagerDao managerDao;
+
 	private Team testTeam1;
 	private Team testTeam2;
 	private Manager testManager1;
 	private PlayerInfo testPlayerInfo1;
+	private PlayerInfo testPlayerInfo2;
 	private Player testPlayer1;
+
 
 	@Before
 	public void beforeTest() {
@@ -71,11 +75,13 @@ public class TeamTest {
 		testTeam1 = new Team();
 		testTeam1.setCategory(Category.MEN);
 		testTeam1.setManager(testManager1);
-		testManager1.addTeam(testTeam1);
-		em.persist(testManager1);
+
+		testTeam2 = new Team();
+		testTeam2.setCategory(Category.U19);
+		testTeam2.setManager(testManager1);
 
 		testPlayer1 = new Player();
-		testPlayer1.setDateOfBirth(LocalDate.of(1994, 5, 30));
+		testPlayer1.setDateOfBirth(LocalDate.of(2000, 5, 30));
 		testPlayer1.setFirstName("first");
 		testPlayer1.setLastName("last");
 		testPlayer1.setEmail("test@gmail.com");
@@ -88,19 +94,24 @@ public class TeamTest {
 		testPlayerInfo1.setJerseyNumber(10);
 		testPlayerInfo1.setPlayer(testPlayer1);
 		testPlayerInfo1.setTeam(testTeam1);
+
+		testPlayerInfo2 = new PlayerInfo();
+		testPlayerInfo2.setJerseyNumber(9);
+		testPlayerInfo2.setPlayer(testPlayer1);
+		testPlayerInfo2.setTeam(testTeam2);
 	}
 
 	@After
 	public void afterTest() {
-		em.remove(testManager1);
+		managerDao.deleteManager(testManager1);
 	}
 	
 	@Test
 	public void createTeam() {
+		managerDao.createManager(testManager1);
 		testTeam2 = new Team();
 		testTeam2.setCategory(Category.U13);
 		testTeam2.setManager(testManager1);
-		testManager1.addTeam(testTeam2);
 		teamDao.createTeam(testTeam2);
 		assertTrue(testTeam2.getId() instanceof Long);
 		assertEquals(testTeam2, em.find(Team.class, testTeam2.getId()));
@@ -108,6 +119,9 @@ public class TeamTest {
 
 	@Test
 	public void updateTeam() {
+		managerDao.createManager(testManager1);
+		playerDao.createPlayer(testPlayer1);
+		teamDao.createTeam(testTeam1);
 		testTeam1.setCategory(Category.U13);
 		teamDao.updateTeam(testTeam1);
 		assertEquals(testTeam1.getCategory(), em.find(Team.class, testTeam1.getId()).getCategory());
@@ -115,6 +129,9 @@ public class TeamTest {
 
 	@Test
 	public void deleteTeam() {
+		managerDao.createManager(testManager1);
+		playerDao.createPlayer(testPlayer1);
+		teamDao.createTeam(testTeam1);
 		Long teamId = testTeam1.getId();
 		teamDao.deleteTeam(testTeam1);
 		assertNull(em.find(Team.class, teamId));
@@ -122,15 +139,23 @@ public class TeamTest {
 
 	@Test
 	public void getTeamById() {
+		managerDao.createManager(testManager1);
+		playerDao.createPlayer(testPlayer1);
+		teamDao.createTeam(testTeam1);
+		playerInfoDao.createPlayerInfo(testPlayerInfo1);
 		Team retrieved = teamDao.getTeamById(testTeam1.getId());
 		assertEquals(testTeam1, retrieved);
-		assertEquals(retrieved.getPlayerInfos().size(), 0);
 	}
 
 	@Test
 	public void isJerseyNumberUniqueTest(){
+		managerDao.createManager(testManager1);
 		playerDao.createPlayer(testPlayer1);
+		teamDao.createTeam(testTeam1);
+		teamDao.createTeam(testTeam2);
 		playerInfoDao.createPlayerInfo(testPlayerInfo1);
+		playerInfoDao.createPlayerInfo(testPlayerInfo2);
+
 		assertFalse(teamDao.isJerseyNumberUnique(testTeam1, 10));
 		assertTrue(teamDao.isJerseyNumberUnique(testTeam1, 11));
 		playerInfoDao.deletePlayerInfo(testPlayerInfo1);

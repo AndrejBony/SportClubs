@@ -234,24 +234,6 @@ public class Manager {
      *
      * @param team added team
      */
-    public void addTeam(Team team) {
-        teams.add(team);
-    }
-
-    /**
-     * Removes team from list of teams
-     *
-     * @param team removed team
-     */
-    public void removeTeam(Team team) {
-        teams.remove(team);
-    }
-
-    /**
-     * Updates team in list of teams
-     *
-     * @param team updated team
-     */
     public void updateTeam(Team team) {
         teams.remove(team);
         teams.add(team);

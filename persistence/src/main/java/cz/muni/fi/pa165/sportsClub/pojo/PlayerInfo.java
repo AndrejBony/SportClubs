@@ -165,25 +165,25 @@ public class PlayerInfo {
      * Sets age limit
      *
      */
-    @PostLoad
-    public void setOlderThenLimit() {
-        Category c = getTeam().getCategory();
-        if (c == Category.MEN) {
-            playerOlderThanTeamLimit = false;
-            return;
-        }
-        if (!LocalDate.now().minusYears(c.getUpperAgeLimit()).isBefore(getPlayer().getDateOfBirth())) {
-            playerOlderThanTeamLimit = true;
-            return;
-        }
-        playerOlderThanTeamLimit = false;
-
-        if (!LocalDate.now().minusYears(c.getBottomAgeLimit()).isAfter(getPlayer().getDateOfBirth())) {
-            playerYoungerThanTeamLimit = true;
-            return;
-        }
-        playerYoungerThanTeamLimit = false;
-    }
+//    @PostLoad
+//    public void setOlderThenLimit() {
+//        Category c = getTeam().getCategory();
+//        if (c == Category.MEN) {
+//            playerOlderThanTeamLimit = false;
+//            return;
+//        }
+//        if (!LocalDate.now().minusYears(c.getUpperAgeLimit()).isBefore(getPlayer().getDateOfBirth())) {
+//            playerOlderThanTeamLimit = true;
+//            return;
+//        }
+//        playerOlderThanTeamLimit = false;
+//
+//        if (!LocalDate.now().minusYears(c.getBottomAgeLimit()).isAfter(getPlayer().getDateOfBirth())) {
+//            playerYoungerThanTeamLimit = true;
+//            return;
+//        }
+//        playerYoungerThanTeamLimit = false;
+//    }
 
     @Override
     public String toString() {

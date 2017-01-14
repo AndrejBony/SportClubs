@@ -106,7 +106,6 @@ public class PlayerInfoTest {
 		teamDao.createTeam(testTeam2);
 
 		testTeam2.setManager(testManager1);
-		testManager1.addTeam(testTeam2);
 		testPlayerInfo2 = new PlayerInfo();
 		testPlayerInfo2.setPlayer(testPlayer1);
 		testPlayerInfo2.setTeam(testTeam2);
