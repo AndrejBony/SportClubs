@@ -54,7 +54,7 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
         if (!validMobile()) {
             return;
         }
-        validDateOfBirth
+        validDateOfBirth();
         if ($scope.player.id != null) {
             updatePlayer($scope.player);
             return;
