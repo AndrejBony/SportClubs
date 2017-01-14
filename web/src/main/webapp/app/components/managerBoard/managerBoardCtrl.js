@@ -101,7 +101,11 @@ angular.module("sportsClub").controller('managerBoardCtrl', function ($scope, $h
         });
         modalInstance.result.then(function (updatedData) {
             if(updatedData.edited == true) {
-             $scope.getPlayersOfTeam(displayingTeam);
+                for(var i =0;i<$scope.playerInfos.length;i++) {
+                    if ($scope.playerInfos[i].player.id == updatedData.data.id) {
+                        $scope.playerInfos[i].player = updatedData.data;
+                    }
+                }
          }
         }, function () {
         });

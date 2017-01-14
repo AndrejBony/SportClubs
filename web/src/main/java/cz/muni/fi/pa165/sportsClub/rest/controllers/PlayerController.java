@@ -50,10 +50,11 @@ public class PlayerController {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-	public void update(@Valid @RequestBody PlayerDto player, HttpServletRequest hsr) throws TokenValidationException {
+	public PlayerDto update(@Valid @RequestBody PlayerDto player, HttpServletRequest hsr) throws TokenValidationException {
 		String token = (hsr.getHeader("Authorization")).split(" ")[1];
 		AuthUtils.authorizeRestCall(token, AUTHORIZED_ROLES);
         playerFacade.updatePlayer(player);
+        return player;
     }
 
     @RequestMapping(path = "/{playerId}", method = RequestMethod.GET)

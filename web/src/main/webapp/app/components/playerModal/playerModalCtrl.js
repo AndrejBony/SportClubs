@@ -90,7 +90,7 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
         $http.put(restInterface + '/player', player).then(
                 function (response) {
                     alert("Player updated");
-                    $scope.close({"edited": true});
+                    $scope.close({"edited": true, "data": response.data});
                 },
                 function (err) {
                     $scope.handleErrors(err);
