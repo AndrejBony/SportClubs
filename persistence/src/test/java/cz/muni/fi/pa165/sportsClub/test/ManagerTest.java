@@ -245,6 +245,39 @@ public class ManagerTest {
 	}
 
 	@Test
+	public void getFreePlayersWithDobBetween(){
+		managerDao.createManager(manager);
+		assertNotNull(manager.getId());
+		playerDao.createPlayer(player1);
+		playerDao.createPlayer(player2);
+		playerDao.createPlayer(player3);
+		playerDao.createPlayer(player4);
+
+		Team team1 = new Team();
+		team1.setCategory(Category.MEN);
+		team1.setManager(manager);
+		teamDao.createTeam(team1);
+
+		Team team2 = new Team();
+		team2.setCategory(Category.U17);
+		team2.setManager(manager);
+		teamDao.createTeam(team2);
+
+		PlayerInfo playerInfo1 = new PlayerInfo();
+		playerInfo1.setPlayer(player4);
+		playerInfo1.setTeam(team1);
+		playerInfo1.setJerseyNumber(14);
+		playerInfoDao.createPlayerInfo(playerInfo1);
+
+		LocalDate bottomLimit = LocalDate.parse("1995-06-15");
+		LocalDate upperLimit = LocalDate.parse("1999-06-15");
+		List<Player> freePlayers = managerDao.getFreePlayersWithDobBetween(manager, bottomLimit, upperLimit);
+
+		assertEquals(1, freePlayers.size());
+		assertEquals(player3, freePlayers.get(0));
+	}
+
+	@Test
 	public void testGetManagerByEmail() {
 		managerDao.createManager(manager);
 		Manager foundManager = managerDao.getManagerByEmail(manager.getEmail());

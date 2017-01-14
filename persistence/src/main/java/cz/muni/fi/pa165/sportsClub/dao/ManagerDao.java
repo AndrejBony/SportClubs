@@ -81,8 +81,16 @@ public interface ManagerDao {
 	List<Player> getPlayersWithDobBetween(Team team, LocalDate bottomLimit, LocalDate upperLimit);
 
 	/**
-	 * @param manager
-	 * @return list of categories of teams fo concrete Manager
+	 *
+	 * @param manager,ageLimitDate
+	 * @return list of free players with date of birth between two dates
 	 */
+	List<Player> getFreePlayersWithDobBetween(Manager manager, LocalDate bottomLimit, LocalDate upperLimit);
+
+
+		/**
+         * @param manager
+         * @return list of categories of teams fo concrete Manager
+         */
 	List<Category> getCategoriesOfTeams(Manager manager);
 }
