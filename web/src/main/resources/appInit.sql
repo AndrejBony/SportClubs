@@ -1,9 +1,9 @@
 --This script has been created by createTestDataScript() method in TestDataUtils class.
 INSERT INTO Manager (id,firstName,lastName,email,mobile,password,clubName,role) VALUES (666666,'adminfname','adminlname','admin@mail.com','+666666','MOrHTbpoicizcJSny0xbOB94u8VC1BTBh6VxrKp1DXA/PzMx6GS+0lIqRFwxpNsU7YxXqInwtB/4SShJdJL/rQ==','all','admin');
 --password in open form: adminpassword
-INSERT INTO Manager (id,firstName,lastName,email,mobile,password,clubName,role) VALUES (10000,'0fname','0lname','0man@mail.com','+0','Bk4jW8fpibUJVJRUaomfvF8RDj1AmQWUyOxNw3OWLWU8LmBFD8V61WEvGr8N/JNkHBzrGwBRfg/Cy/6nGo/nFQ==','0clubName','manager');
+INSERT INTO Manager (id,firstName,lastName,email,mobile,password,clubName,role) VALUES (10000,'0fname','0lname','0man@mail.com','+0','Bk4jW8fpibUJVJRUaomfvF8RDj1AmQWUyOxNw3OWLWU8LmBFD8V61WEvGr8N/JNkHBzrGwBRfg/Cy/6nGo/nFQ==','All stars-West','manager');
 --password in open form: 0password
-INSERT INTO Manager (id,firstName,lastName,email,mobile,password,clubName,role) VALUES (10001,'1fname','1lname','1man@mail.com','+1','9Pvii35GAD41nV36dlVMnneYU1o688Y7WvHMAaOIoJ6mV1D0Bf7RLolCLOkGu2VMOsXMx1dJLhowC+lV5/qv7A==','1clubName','manager');
+INSERT INTO Manager (id,firstName,lastName,email,mobile,password,clubName,role) VALUES (10001,'1fname','1lname','1man@mail.com','+1','9Pvii35GAD41nV36dlVMnneYU1o688Y7WvHMAaOIoJ6mV1D0Bf7RLolCLOkGu2VMOsXMx1dJLhowC+lV5/qv7A==','All stars-East','manager');
 --password in open form: 1password
 INSERT INTO Team (id,category,manager_id) VALUES (10002,0,10000);
 INSERT INTO Team (id,category,manager_id) VALUES (10003,1,10000);
@@ -15,26 +15,22 @@ INSERT INTO Team (id,category,manager_id) VALUES (10008,1,10001);
 INSERT INTO Team (id,category,manager_id) VALUES (10009,2,10001);
 INSERT INTO Team (id,category,manager_id) VALUES (10010,3,10001);
 INSERT INTO Team (id,category,manager_id) VALUES (10011,4,10001);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10012,'0fname','0lname','0player@mail.com','+0',120.0,120.0,'1967-06-06',10000);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10013,'1fname','1lname','1player@mail.com','+1',120.0,120.0,'1998-06-06',10001);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10014,'2fname','2lname','2player@mail.com','+2',120.0,120.0,'2000-06-06',10000);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10015,'3fname','3lname','3player@mail.com','+3',120.0,120.0,'2002-06-06',10001);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10016,'4fname','4lname','4player@mail.com','+4',120.0,120.0,'2004-06-06',10000);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10017,'5fname','5lname','5player@mail.com','+5',120.0,120.0,'1967-06-06',10001);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10018,'6fname','6lname','6player@mail.com','+6',120.0,120.0,'1998-06-06',10000);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10019,'7fname','7lname','7player@mail.com','+7',120.0,120.0,'2000-06-06',10001);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10020,'8fname','8lname','8player@mail.com','+8',120.0,120.0,'2002-06-06',10000);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10021,'9fname','9lname','9player@mail.com','+9',120.0,120.0,'2004-06-06',10001);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10022,'10fname','10lname','10player@mail.com','+10',120.0,120.0,'1967-06-06',10000);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10023,'11fname','11lname','11player@mail.com','+11',120.0,120.0,'1998-06-06',10001);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10024,'12fname','12lname','12player@mail.com','+12',120.0,120.0,'2000-06-06',10000);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10025,'13fname','13lname','13player@mail.com','+13',120.0,120.0,'2002-06-06',10001);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10026,'14fname','14lname','14player@mail.com','+14',120.0,120.0,'2004-06-06',10000);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10027,'15fname','15lname','15player@mail.com','+15',120.0,120.0,'1967-06-06',10001);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10028,'16fname','16lname','16player@mail.com','+16',120.0,120.0,'1998-06-06',10000);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10029,'17fname','17lname','17player@mail.com','+17',120.0,120.0,'2000-06-06',10001);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10030,'18fname','18lname','18player@mail.com','+18',120.0,120.0,'2002-06-06',10000);
-INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10031,'19fname','19lname','19player@mail.com','+19',120.0,120.0,'2004-06-06',10001);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10012,'Lionel','Messi','0player@mail.com','+0',120.0,120.0,'1967-06-06',10000);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10013,'Gareth','Bale','1player@mail.com','+1',120.0,120.0,'1998-06-06',10001);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10015,'Antoine','Griezmann ','3player@mail.com','+3',120.0,120.0,'2002-06-06',10001);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10016,'Manuel','Neuer','4player@mail.com','+4',120.0,120.0,'2004-06-06',10000);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10017,'Christiano','Ronaldo','5player@mail.com','+5',120.0,120.0,'1967-06-06',10001);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10018,'Paul','Pogba','6player@mail.com','+6',120.0,120.0,'1998-06-06',10000);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10019,'Toni','Kross','7player@mail.com','+7',120.0,120.0,'2000-06-06',10001);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10021,'Kevin','de Bruyne','9player@mail.com','+9',120.0,120.0,'2004-06-06',10001);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10022,'Robert','Lewandowski','10player@mail.com','+10',120.0,120.0,'1967-06-06',10000);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10023,'Gianluigi','Buffon','11player@mail.com','+11',120.0,120.0,'1998-06-06',10001);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10024,'Arturo','Vidal','12player@mail.com','+12',120.0,120.0,'2000-06-06',10000);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10026,'Gerard','Pique','14player@mail.com','+14',120.0,120.0,'2004-06-06',10000);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10027,'Jerome','Boateng','15player@mail.com','+15',120.0,120.0,'1967-06-06',10001);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10029,'Karim','Benzema','17player@mail.com','+17',120.0,120.0,'2000-06-06',10001);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10030,'Marco','Reus','18player@mail.com','+18',120.0,120.0,'2002-06-06',10000);
+INSERT INTO Player (id,firstName,lastName,email,mobile,weight,height,dateOfBirth,manager_id) VALUES (10031,'David','de Gea','19player@mail.com','+19',120.0,120.0,'2004-06-06',10001);
 INSERT INTO PlayerInfo (id,jerseyNumber,playerId,teamId) VALUES (10032,0,10012,10002);
 INSERT INTO PlayerInfo (id,jerseyNumber,playerId,teamId) VALUES (10033,1,10014,10004);
 INSERT INTO PlayerInfo (id,jerseyNumber,playerId,teamId) VALUES (10034,2,10016,10006);
