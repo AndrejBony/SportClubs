@@ -158,9 +158,7 @@ angular.module("sportsClub").controller('managerBoardCtrl', function ($scope, $h
             }
         });
         modalInstance.result.then(function (updatedData) {
-            if (updatedData.new == true) {
-                $scope.playerInfos.push(updatedData.data);
-            }
+
         }, function (err) {
             $scope.handleErrors(err);
         });
@@ -218,8 +216,8 @@ angular.module("sportsClub").controller('managerBoardCtrl', function ($scope, $h
                         suitablePlayers: function () {
                             return response.data;
                         },
-                        teamId: function () {
-                            return $scope.displayingTeam.id;
+                        team: function () {
+                            return $scope.displayingTeam;
                         }
                     }
                 });

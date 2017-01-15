@@ -1,6 +1,8 @@
 "use strict";
-angular.module("sportsClub").controller('suitablePlayersModalCtrl',function($scope, $uibModal, $uibModalInstance, $http, suitablePlayers,teamId) {
+angular.module("sportsClub").controller('suitablePlayersModalCtrl',function($scope, $uibModal, $uibModalInstance, $http, suitablePlayers, team) {
 	$scope.suitablePlayers = angular.copy(suitablePlayers);
+    $scope.team = angular.copy(team);
+
 
     $scope.close = function(updatedData){
         $uibModalInstance.close(updatedData);
@@ -34,15 +36,18 @@ angular.module("sportsClub").controller('suitablePlayersModalCtrl',function($sco
                     return null;
                 },
                 team: function () {
-                    return null;
+                    return $scope.team;
                 },
                 managerId: function () {
+                    return null;
+                },
+                playerTeams: function () {
                     return null;
                 }
             }
         });
         modalInstance.result.then(function (updatedData) {
-                $scope.playerInfos.player.push(updatedData.data);
+            $scope.close(updatedData.data);
         
             }, function () {
         });

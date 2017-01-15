@@ -58,7 +58,7 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
             return;
         }
         if ($scope.team != null) {
-            createPlayer($scope.playerinfo.player);
+            createPlayer($scope.playerinfo.player, $scope.team.id, $scope.playerinfo.jerseyNumber);
             return;
         }
         createFreePlayer($scope.playerinfo.player, managerId);
