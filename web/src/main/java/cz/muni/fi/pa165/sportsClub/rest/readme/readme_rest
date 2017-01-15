@@ -5,10 +5,27 @@ use: -H "Authorization:	Bearer xxx" in each curl request. Use correct authorizat
 MANAGER REST
 ------------
 (create) 
-curl -X POST -i -H "Content-Type: application/json" --data '{"id":"${id}","firstName":"${firstName}","lastName":"${lastName}","email":"${email}","mobile":"${mobile}", "password":"${password}", "clubName":"${clubName}", "role":"${role}"}' http://localhost:8080/pa165/rest/manager
+curl -X POST -i -H "Content-Type: application/json" --data '{
+"firstName":"${firstName}",
+"lastName":"${lastName}",
+"email":"${email}",
+"mobile":"${mobile}",
+"password":"${password}",
+"clubName":"${clubName}",
+"role":"${role}"}' 
+http://localhost:8080/pa165/rest/manager
 
 (update)
-curl -X PUT -i -H "Content-Type: application/json" --data '{"id":"${id}","firstName":"${firstName}","lastName":"${lastName}","email":"${email}","mobile":"${mobile}", "password":"${password}", "clubName":"${clubName}", "role":"${role}"}' http://localhost:8080/pa165/rest/manager
+curl -X PUT -i -H "Content-Type: application/json" --data '{
+"id":"${id}",
+"firstName":"${firstName}",
+"lastName":"${lastName}",
+"email":"${email}",
+"mobile":"${mobile}",
+"password":"${password}",
+"clubName":"${clubName}", 
+"role":"${role}"}' 
+http://localhost:8080/pa165/rest/manager
 
 (delete)
 curl -X DELETE -i -H http://localhost:8080/pa165/rest/manager/{managerId}
@@ -35,10 +52,48 @@ curl -X POST -i -H "Content-Type: application/json" --data '{"email":"${email}",
 PLAYER REST
 -----------
 (create)
-curl -X POST -i -H "Content-Type: application/json" --data '{"id":"${id}","firstName":"${firstName}","lastName":"${lastName}","email":"${email}","mobile":"${mobile}", "weight":"${weight}", "height":"${height}", "dateOfBirth":"${dateOfBirth}","manager_id":"${manager_id}"}' http://localhost:8080/pa165/rest/player
+curl -X POST -i -H "Content-Type: application/json" --data '{
+"firstName":"${firstName}",
+"lastName":"${lastName}",
+"email":"${email}",
+"mobile":"${mobile}",
+"weight":"${weight}",
+"height":"${height}",
+"dateOfBirth":"${dateOfBirth}","manager": {
+    "id": 10000,
+    "clubName": "0clubName",
+    "firstName": "0fname",
+    "lastName": "0lname",
+    "email": "0man@mail.com",
+    "mobile": "+0",
+    "role": "manager",
+    "teams": [],
+    "players": []
+  }}' 
+http://localhost:8080/pa165/rest/player/{managerId}
 
 (update)
-curl -X PUT -i -H "Content-Type: application/json" --data '{"id":"${id}","firstName":"${firstName}","lastName":"${lastName}","email":"${email}","mobile":"${mobile}", "weight":"${weight}", "height":"${height}", "dateOfBirth":"${dateOfBirth}","manager_id":"${manager_id}"}' http://localhost:8080/pa165/rest/player
+curl -X PUT -i -H "Content-Type: application/json" --data '{
+"id":"${id}",
+"firstName":"${firstName}",
+"lastName":"${lastName}",
+"email":"${email}",
+"mobile":"${mobile}",
+"weight":"${weight}",
+"height":"${height}",
+"dateOfBirth":"${dateOfBirth}",
+"manager": {
+    "id": 10000,
+    "clubName": "0clubName",
+    "firstName": "0fname",
+    "lastName": "0lname",
+    "email": "0man@mail.com",
+    "mobile": "+0",
+    "role": "manager",
+    "teams": [],
+    "players": []
+  }}' 
+http://localhost:8080/pa165/rest/player
 
 (delete)
 curl -X DELETE -i -H http://localhost:8080/pa165/rest/player/{playerId}
@@ -60,7 +115,16 @@ PLAYER INFO REST
 curl -X POST -i -H http://localhost:8080/pa165/rest/playerInfo/{teamId}/{playerId}/{jerseyNumber}
 
 (add new player on roster)
-curl -X POST -i -H "Content-Type: application/json" --data '{"id":"${id}","firstName":"${firstName}","lastName":"${lastName}","email":"${email}","mobile":"${mobile}", "weight":"${weight}", "height":"${height}", "dateOfBirth":"${dateOfBirth}","manager_id":"${manager_id}"}' http://localhost:8080/pa165/rest/playerInfo//{teamId}/{jerseyNumber}
+curl -X POST -i -H "Content-Type: application/json" --data '{
+"firstName":"${firstName}",
+"lastName":"${lastName}",
+"email":"${email}",
+"mobile":"${mobile}",
+"weight":"${weight}",
+"height":"${height}",
+"dateOfBirth":"${dateOfBirth}",
+"manager_id":"${manager_id}"}' 
+http://localhost:8080/pa165/rest/playerInfo/{teamId}/{jerseyNumber}
 
 (change jersey number)
 curl -X PUT -i -H http://localhost:8080/pa165/rest/playerInfo/{playerId}/{teamId}/{jerseyNumber}
