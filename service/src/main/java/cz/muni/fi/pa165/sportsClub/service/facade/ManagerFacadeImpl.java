@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.sportsClub.service.facade;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -98,8 +100,15 @@ public class ManagerFacadeImpl implements ManagerFacade {
 
 	@Override
 	public List<PlayerDto> getFreePlayers(Long managerId) {
-		return beanMappingService.mapTo(managerService.getFreePlayersOfClub(new Manager(managerId)),
+		List<PlayerDto> players = beanMappingService.mapTo(managerService.getFreePlayersOfClub(new Manager(managerId)),
 				PlayerDto.class);
+		LocalDate today = LocalDate.now();
+		for(PlayerDto player : players){
+			LocalDate birthday = player.getDateOfBirth();
+			int age = Period.between(birthday, today).getYears();
+			player.setAge(age);
+		}
+		return players;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.sportsClub.service.facade;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,10 @@ public class PlayerFacadeImpl implements PlayerFacade {
 		playerService.createPlayer(playerEntity);
 		p.setId(playerEntity.getId());
 		p.setManager(managerDto);
+		LocalDate today = LocalDate.now();
+		LocalDate birthday = p.getDateOfBirth();
+		int age = Period.between(birthday, today).getYears();
+		p.setAge(age);
 		return p;
 	}
 
@@ -58,7 +64,12 @@ public class PlayerFacadeImpl implements PlayerFacade {
 	@Override
 	public PlayerDto getPlayerById(Long playerId) {
 		Player p = playerService.getPlayerById(playerId);
-		return beanMappingService.mapTo(p, PlayerDto.class);
+		PlayerDto playerDto = beanMappingService.mapTo(p, PlayerDto.class);
+		LocalDate today = LocalDate.now();
+		LocalDate birthday = playerDto.getDateOfBirth();
+		int age = Period.between(birthday, today).getYears();
+		playerDto.setAge(age);
+		return playerDto;
 	}
 
 	@Override
@@ -87,7 +98,14 @@ public class PlayerFacadeImpl implements PlayerFacade {
 
 	@Override
 	public List<PlayerDto> getAllPlayersOfClub(Long clubId) {
-		return beanMappingService.mapTo(playerService.getAllPlayersOfClub(new Manager(clubId)),
+		List<PlayerDto> players =  beanMappingService.mapTo(playerService.getAllPlayersOfClub(new Manager(clubId)),
 				PlayerDto.class);
+		LocalDate today = LocalDate.now();
+		for(PlayerDto player : players){
+			LocalDate birthday = player.getDateOfBirth();
+			int age = Period.between(birthday, today).getYears();
+			player.setAge(age);
+		}
+		return players;
 	}
 }

@@ -15,7 +15,7 @@ public class PlayerOfTeamDto {
 
 	private Long playerInfoId;
 
-	private boolean playerOlderThanTeamLimit;
+	private boolean meetsAgeLimit;
 
 	private PlayerDto player;
 
@@ -56,12 +56,12 @@ public class PlayerOfTeamDto {
 		this.jerseyNumber = jerseyNumber;
 	}
 
-	public boolean isPlayerOlderThanTeamLimit() {
-		return playerOlderThanTeamLimit;
+	public boolean isMeetsAgeLimit() {
+		return meetsAgeLimit;
 	}
 
-	public void setPlayerOlderThanTeamLimit(boolean value) {
-		playerOlderThanTeamLimit = value;
+	public void setMeetsAgeLimit(boolean value) {
+		meetsAgeLimit = value;
 	}
 
 	public Long getPlayerInfoId() {

@@ -120,4 +120,14 @@ public interface TeamService {
      * @return true if age category is unique, false otherwise
      */
     boolean isCategoryOfTeamUnique(Team team);
+
+    /**
+     * Checks if player meets age criteria.
+     *
+     * @param team team
+     * @param player player
+     * @return true if player meets age criteria, false otherwise
+     */
+    boolean playerMeetsAgeLimit(Player player, Team team);
+
 }

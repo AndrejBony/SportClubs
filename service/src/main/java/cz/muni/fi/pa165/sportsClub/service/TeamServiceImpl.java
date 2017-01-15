@@ -78,7 +78,8 @@ public class TeamServiceImpl implements TeamService {
         return team.getPlayerInfos();
     }
 
-    private boolean playerMeetsAgeLimit(Player player, Team team){
+    @Override
+    public boolean playerMeetsAgeLimit(Player player, Team team){
         LocalDate today = LocalDate.now();
         LocalDate birthday = player.getDateOfBirth();
 

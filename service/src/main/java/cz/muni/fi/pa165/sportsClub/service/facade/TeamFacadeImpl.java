@@ -53,7 +53,6 @@ public class TeamFacadeImpl implements TeamFacade {
     @Override
     public void updateTeam(TeamDto t) {
         teamService.updateTeam(beanMappingService.mapTo(t, Team.class));
-
     }
 
     @Override
@@ -87,11 +86,17 @@ public class TeamFacadeImpl implements TeamFacade {
         List<PlayerOfTeamDto> players = new ArrayList<PlayerOfTeamDto>();
         List<PlayerInfo> infos = teamService.getPlayerInfos(teamId);
         PlayerOfTeamDto playerOfTeam;
+        LocalDate today = LocalDate.now();
         for (PlayerInfo playerInfo : infos) {
             playerOfTeam = new PlayerOfTeamDto();
             playerOfTeam.setJerseyNumber(playerInfo.getJerseyNumber());
             playerOfTeam.setPlayerInfoId(playerInfo.getId());
-            playerOfTeam.setPlayer(beanMappingService.mapTo(playerInfo.getPlayer(), PlayerDto.class));
+            PlayerDto playerDto = beanMappingService.mapTo(playerInfo.getPlayer(), PlayerDto.class);
+            LocalDate birthday = playerDto.getDateOfBirth();
+            int age = Period.between(birthday, today).getYears();
+            playerDto.setAge(age);
+            playerOfTeam.setPlayer(playerDto);
+            playerOfTeam.setMeetsAgeLimit(teamService.playerMeetsAgeLimit(playerInfo.getPlayer(), playerInfo.getTeam()));
             players.add(playerOfTeam);
         }
         return players;
@@ -103,12 +108,19 @@ public class TeamFacadeImpl implements TeamFacade {
         Team team = teamService.getTeamById(teamId);
         Long piId = teamService.assignPlayerToTeam(player, team, jerseyNumber);
         
-        PlayerOfTeamDto pi = new PlayerOfTeamDto();
-        pi.setJerseyNumber(jerseyNumber);
-        pi.setPlayer(beanMappingService.mapTo(player, PlayerDto.class));
-        pi.setPlayerInfoId(piId);
-        pi.setPlayerOlderThanTeamLimit(false);
-        return pi;
+        PlayerOfTeamDto playerOfTeam = new PlayerOfTeamDto();
+        playerOfTeam.setJerseyNumber(jerseyNumber);
+        PlayerDto newPlayer = beanMappingService.mapTo(playerOfTeam, PlayerDto.class);
+
+        LocalDate today = LocalDate.now();
+        LocalDate birthday = newPlayer.getDateOfBirth();
+        int age = Period.between(birthday, today).getYears();
+        newPlayer.setAge(age);
+
+        playerOfTeam.setPlayer(newPlayer);
+        playerOfTeam.setPlayerInfoId(piId);
+        playerOfTeam.setMeetsAgeLimit(teamService.playerMeetsAgeLimit(player, team));
+        return playerOfTeam;
     }
 
     @Override
@@ -118,13 +130,18 @@ public class TeamFacadeImpl implements TeamFacade {
         player.setManager(team.getManager());
         playerService.createPlayer(player);
         newPlayer.setId(player.getId());
+
+        LocalDate today = LocalDate.now();
+        LocalDate birthday = newPlayer.getDateOfBirth();
+        int age = Period.between(birthday, today).getYears();
+        newPlayer.setAge(age);
+
         Long piId = teamService.assignPlayerToTeam(player, team, jerseyNumber);
-        
         PlayerOfTeamDto pi = new PlayerOfTeamDto();
         pi.setJerseyNumber(jerseyNumber);
         pi.setPlayer(newPlayer);
         pi.setPlayerInfoId(piId);
-        pi.setPlayerOlderThanTeamLimit(false);
+        pi.setMeetsAgeLimit(teamService.playerMeetsAgeLimit(player, team));
         return pi;
     }
 

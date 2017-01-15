@@ -1,5 +1,5 @@
 <div class="row">
-<div class="col-sm-6">
+<div class="col-sm-5">
 <h1>Teams
     <button type="button" class="btn btn-success" ng-click="openNewTeamModal()">
         <span class="glyphicon glyphicon-plus"></span>
@@ -13,7 +13,7 @@
         <button style="width: 100px;" type="button" ng-click="getFreePlayersOfClub()" class="btn btn-default">Free Players</button>
     </div>
 </div>
-<div class="col-sm-6">
+<div class="col-sm-7">
 <h1 style="display: inline-block;"><span ng-if="displayingTeam!=null">{{displayingTeam.category}} Roster</span><span ng-if="displayingTeam==null">Free Players</span>
     <button ng-hide="displayingTeam==null"type="button" class="btn btn-success" ng-click="openSuitablePlayersModal()">
         <span class="glyphicon glyphicon-plus"></span>
@@ -31,6 +31,7 @@
             <th>Jersey Number</th>
             <th>First name</th>
             <th>Last Name</th>
+            <th>Age</th>
         </tr>
         </thead>
         <tbody>
@@ -38,6 +39,7 @@
             <td>{{playerInfo.jerseyNumber}}</td>
             <td>{{playerInfo.player.firstName}}</td>
             <td>{{playerInfo.player.lastName}}</td>
+            <td ng-class='{black: playerInfo.meetsAgeLimit, red : !playerInfo.meetsAgeLimit}'>{{playerInfo.player.age}}</td>
             <td>
                 <button ng-click="openPlayerModal(playerInfo,displayingTeam,null)" type="submit" class="btn btn-primary">Edit</button>
             </td>
@@ -52,12 +54,14 @@
         <tr>
             <th>First name</th>
             <th>Last Name</th>
+            <th>Age</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="playerInfo in playerInfos">
             <td>{{playerInfo.firstName}}</td>
             <td>{{playerInfo.lastName}}</td>
+            <td>{{playerInfo.age}}</td>
             <td>
                 <button ng-click="openPlayerModal(playerInfo,null,null)" type="submit" class="btn btn-primary">Edit</button>
             </td>

@@ -34,6 +34,9 @@ public class PlayerDto {
 	@JsonSerialize(using = LocalDateSerializer.class)
 	private LocalDate dateOfBirth;
 
+	@Min(0)
+	private int age;
+
 	@NotNull
 	@Pattern(regexp = "[^@]+@[^@]+\\.[^@]+")
 	private String email;
@@ -132,6 +135,14 @@ public class PlayerDto {
 
 	public void setManager(ManagerDto manager) {
 		this.manager = manager;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 
 	@Override

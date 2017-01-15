@@ -55,3 +55,4 @@ INSERT INTO PlayerInfo (id,jerseyNumber,playerId,teamId) VALUES (10048,6,10025,1
 INSERT INTO PlayerInfo (id,jerseyNumber,playerId,teamId) VALUES (10049,7,10027,10007);
 INSERT INTO PlayerInfo (id,jerseyNumber,playerId,teamId) VALUES (10050,8,10029,10009);
 INSERT INTO PlayerInfo (id,jerseyNumber,playerId,teamId) VALUES (10051,9,10031,10011);
+INSERT INTO PlayerInfo (id,jerseyNumber,playerId,teamId) VALUES (10052,99,10013,10004);
