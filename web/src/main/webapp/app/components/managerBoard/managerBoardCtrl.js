@@ -236,6 +236,5 @@ angular.module("sportsClub").controller('managerBoardCtrl', function ($scope, $h
         getTeams($scope.managerId);
         $scope.getFreePlayersOfClub();
     }
-
     init();
 });

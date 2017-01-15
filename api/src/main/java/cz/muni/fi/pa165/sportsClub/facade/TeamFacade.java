@@ -120,5 +120,5 @@ public interface TeamFacade {
      * @param jerseyNumber tested jersey number
      * @return true if jersey number is unique, false otherwise
      */
-    boolean isJerseyNumberUnique(Long teamId, int jerseyNumber);
+    boolean isJerseyNumberUnique(Long playerId, Long teamId, int jerseyNumber);
 }

@@ -156,8 +156,8 @@ public class TeamTest {
 		playerInfoDao.createPlayerInfo(testPlayerInfo1);
 		playerInfoDao.createPlayerInfo(testPlayerInfo2);
 
-		assertFalse(teamDao.isJerseyNumberUnique(testTeam1, 10));
-		assertTrue(teamDao.isJerseyNumberUnique(testTeam1, 11));
+		assertTrue(teamDao.isJerseyNumberUnique(testPlayer1,testTeam1, 10));
+		assertTrue(teamDao.isJerseyNumberUnique(testPlayer1,testTeam1, 11));
 		playerInfoDao.deletePlayerInfo(testPlayerInfo1);
 		playerDao.deletePlayer(testPlayer1);
 	}

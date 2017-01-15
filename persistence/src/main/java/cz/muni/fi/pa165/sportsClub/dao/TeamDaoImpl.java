@@ -57,11 +57,15 @@ public class TeamDaoImpl implements TeamDao {
     }
 
     @Override
-    public boolean isJerseyNumberUnique(Team team, int jerseyNumber) {
+    public boolean isJerseyNumberUnique(Player player, Team team, int jerseyNumber) {
         TypedQuery<PlayerInfo> query = em.createQuery("SELECT pi FROM Team t "
                 + "JOIN t.playerInfos pi "
-                + "WHERE pi.jerseyNumber = :jerseyNumber", PlayerInfo.class);
+                + "WHERE pi.jerseyNumber = :jerseyNumber "
+                + "AND t = :team "
+                + "AND pi.player <> :player ", PlayerInfo.class);
         query.setParameter("jerseyNumber", jerseyNumber);
+        query.setParameter("team", team);
+        query.setParameter("player", player);
         if (query.getResultList().isEmpty()) {
             return true;
         }

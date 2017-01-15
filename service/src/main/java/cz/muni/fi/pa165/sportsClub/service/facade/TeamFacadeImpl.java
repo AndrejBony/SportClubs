@@ -157,7 +157,7 @@ public class TeamFacadeImpl implements TeamFacade {
     }
 
     @Override
-    public boolean isJerseyNumberUnique(Long tID, int jerseyNumber) {
-        return teamService.isJerseyNumberUnique(new Team(tID), jerseyNumber);
+    public boolean isJerseyNumberUnique(Long playerId, Long teamId, int jerseyNumber) {
+        return teamService.isJerseyNumberUnique(new Player(playerId), new Team(teamId), jerseyNumber);
     }
 }

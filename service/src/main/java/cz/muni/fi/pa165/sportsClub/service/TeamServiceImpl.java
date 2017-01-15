@@ -91,7 +91,7 @@ public class TeamServiceImpl implements TeamService {
         if(!playerMeetsAgeLimit(p,t)){
             throw new DataIntegrityViolationException("Player does not match age criteria of team");
         }
-        if(!teamDao.isJerseyNumberUnique(t,jerseyNumber)){
+        if(!teamDao.isJerseyNumberUnique(p, t,jerseyNumber)){
             throw new DataIntegrityViolationException("Jersey number is not unique in the team");
         }
         if(p.getManager().getId() != t.getManager().getId()){
@@ -107,7 +107,7 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public void changeJerseyNumber(Player p, Team t, int newjerseyNumber) {
-        if(!teamDao.isJerseyNumberUnique(t,newjerseyNumber)){
+        if(!teamDao.isJerseyNumberUnique(p, t,newjerseyNumber)){
         	throw new DataIntegrityViolationException("Jersey number is not unique in the team");
         }
         playerInfoDao.changeJerseyNumber(t, p, newjerseyNumber);
@@ -128,7 +128,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public boolean isJerseyNumberUnique(Team team, int jerseyNumber) {
-        return teamDao.isJerseyNumberUnique(team, jerseyNumber);
+    public boolean isJerseyNumberUnique(Player player, Team team, int jerseyNumber) {
+        return teamDao.isJerseyNumberUnique(player, team, jerseyNumber);
     }
 }

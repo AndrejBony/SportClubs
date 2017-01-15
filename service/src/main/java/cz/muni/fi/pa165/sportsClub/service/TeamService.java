@@ -107,10 +107,11 @@ public interface TeamService {
      * Checks if jersey number in team is unique
      *
      * @param team team
+     * @param player player
      * @param jerseyNumber tested jersey number
      * @return true if jersey number is unique, false otherwise
      */
-    boolean isJerseyNumberUnique(Team team, int jerseyNumber);
+    boolean isJerseyNumberUnique(Player player, Team team, int jerseyNumber);
 
     /**
      * Checks if age category is unique
