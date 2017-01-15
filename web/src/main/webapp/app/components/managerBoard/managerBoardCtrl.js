@@ -121,8 +121,9 @@ angular.module("sportsClub").controller('managerBoardCtrl', function ($scope, $h
                         }
                         else{
                             for (var i = 0; i < $scope.playerInfos.length; i++) {
-                                if ($scope.playerInfos[i].player.id == updatedData.data.id) {
-                                    $scope.playerInfos[i].player = updatedData.data;
+                                if ($scope.playerInfos[i].player.id == updatedData.data.player.id) {
+                                    $scope.playerInfos[i].player = updatedData.data.player;
+                                    $scope.playerInfos[i].jerseyNumber = updatedData.data.jerseyNumber;
                                 }
                             }
                         }

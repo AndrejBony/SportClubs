@@ -1,20 +1,21 @@
 "use strict";
-angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $http, $filter ,$uibModalInstance, playerinfo, team, managerId, playerTeams) {
+angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $http, $filter, $uibModalInstance, playerinfo, team, managerId, playerTeams) {
     if (playerinfo != null) {
         $scope.playerinfo = angular.copy(playerinfo);
     } else {
         $scope.playerinfo = {
             "jerseyNumber": null,
-            "player":{
-            "id": null,
-            "firstName": null,
-            "lastName": null,
-            "dateOfBirth": null,
-            "email": null,
-            "password": null,
-            "mobile": null,
-            "weight": null,
-            "heigth": null}
+            "player": {
+                "id": null,
+                "firstName": null,
+                "lastName": null,
+                "dateOfBirth": null,
+                "email": null,
+                "password": null,
+                "mobile": null,
+                "weight": null,
+                "heigth": null
+            }
         }
     }
 
@@ -34,7 +35,7 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
         $uibModalInstance.close(updatedData);
     }
 
-    var validDateOfBirth = function() {
+    var validDateOfBirth = function () {
         $scope.playerinfo.player.dateOfBirth = $filter('date')($scope.playerinfo.player.dateOfBirth, "yyyy-MM-dd");
     }
 
@@ -53,14 +54,14 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
         }
         validDateOfBirth();
         if ($scope.playerinfo.player.id != null) {
-            updatePlayer($scope.playerinfo.player);
+            updatePlayer($scope.playerinfo.player, $scope.team, $scope.playerinfo.jerseyNumber);
             return;
         }
         if ($scope.team != null) {
             createPlayer($scope.playerinfo.player);
             return;
         }
-        createFreePlayer($scope.playerinfo.player,managerId);
+        createFreePlayer($scope.playerinfo.player, managerId);
     }
 
     var validFirstName = function () {
@@ -98,13 +99,13 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
 
     var createPlayer = function (player, teamId, jerseyNumber) {
         $http.post(restInterface + '/playerInfo/' + teamId + '/' + jerseyNumber, player).then(
-                function (response) {
-                    alert("Player created and assigned to the team");
-                    $scope.close({"new": true, "data": response.data});
-                },
-                function (err) {
-                    $scope.handleErrors(err);
-                }
+            function (response) {
+                alert("Player created and assigned to the team");
+                $scope.close({"new": true, "data": response.data});
+            },
+            function (err) {
+                $scope.handleErrors(err);
+            }
         );
     }
 
@@ -120,15 +121,28 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
         );
     }
 
-    var updatePlayer = function (player) {
+    var updatePlayer = function (player, team, jerseyNumber) {
         $http.put(restInterface + '/player', player).then(
-                function (response) {
+            function (response) {
+                if (team != null) {
+                    $http.put(restInterface + '/playerInfo/' + player.id + '/' + team.id + '/' + jerseyNumber).then(
+                        function (response) {
+                            alert("Player updated");
+                            $scope.close({"edited": true, "data": $scope.playerinfo});
+                        },
+                        function (err) {
+                            $scope.handleErrors(err);
+                        }
+                    );
+                }
+                else{
                     alert("Player updated");
                     $scope.close({"edited": true, "data": response.data});
-                },
-                function (err) {
-                    $scope.handleErrors(err);
                 }
+            },
+            function (err) {
+                $scope.handleErrors(err);
+            }
         );
     }
 });
