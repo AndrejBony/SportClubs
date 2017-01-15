@@ -20,7 +20,7 @@ public interface ManagerFacade {
      *
      * @param m created manager
      */
-    void createManager(ManagerDto m);
+    Long createManager(ManagerDto m);
 
     /**
      * Updates manager

@@ -62,7 +62,8 @@ public class ManagerController {
 		String token = (hsr.getHeader("Authorization")).split(" ")[1];
 		AuthUtils.authorizeRestCall(token, "admin");
 		manager.setRole("manager");
-		managerFacade.createManager(manager);
+		Long id = managerFacade.createManager(manager);
+		manager.setId(id);
 		return manager;
 	}
 

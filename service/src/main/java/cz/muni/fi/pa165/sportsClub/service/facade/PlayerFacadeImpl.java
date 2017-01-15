@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import cz.muni.fi.pa165.sportsClub.dto.ManagerDto;
 import cz.muni.fi.pa165.sportsClub.service.ManagerService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,12 +34,15 @@ public class PlayerFacadeImpl implements PlayerFacade {
 	private BeanMappingService beanMappingService;
 
 	@Override
-	public void createPlayer(PlayerDto p, Long managerId) {
+	public PlayerDto createPlayer(PlayerDto p, Long managerId) {
 		Manager manager = managerService.getManagerById(managerId);
+		ManagerDto managerDto = beanMappingService.mapTo(manager, ManagerDto.class);
 		Player playerEntity = beanMappingService.mapTo(p, Player.class);
 		playerEntity.setManager(manager);
 		playerService.createPlayer(playerEntity);
 		p.setId(playerEntity.getId());
+		p.setManager(managerDto);
+		return p;
 	}
 
 	@Override

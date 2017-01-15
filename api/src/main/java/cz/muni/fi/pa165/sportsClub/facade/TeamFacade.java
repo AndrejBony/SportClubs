@@ -20,7 +20,7 @@ public interface TeamFacade {
      *
      * @param t created team
      */
-    void createTeam(TeamDto t);
+    Long createTeam(TeamDto t);
 
     /**
      * Updates team

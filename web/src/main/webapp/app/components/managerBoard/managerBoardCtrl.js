@@ -90,13 +90,13 @@ angular.module("sportsClub").controller('managerBoardCtrl', function ($scope, $h
     }
 
     var openPlayerModalinEditMode = function (playerData, teamData, managerId) {
-        $http.get(restInterface + "/player/" + playerData.id + "/teams").then(
+        $http.get(restInterface + "/player/" + playerData.player.id + "/teams").then(
             function (response) {
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/components/playerModal/playerModal.html',
                     controller: 'playerModalCtrl',
                     resolve: {
-                        player: function () {
+                        playerinfo: function () {
                             return playerData;
                         },
                         team: function () {
@@ -111,13 +111,19 @@ angular.module("sportsClub").controller('managerBoardCtrl', function ($scope, $h
                     }
                 });
                 modalInstance.result.then(function (updatedData) {
-                    if (updatedData.new == true) {
-                        $scope.playerInfos.push(updatedData.data);
-                    }
                     if (updatedData.edited == true) {
-                        for (var i = 0; i < $scope.playerInfos.length; i++) {
-                            if ($scope.playerInfos[i].player.id == updatedData.data.id) {
-                                $scope.playerInfos[i].player = updatedData.data;
+                        if($scope.displayingTeam == null){
+                            for (var i = 0; i < $scope.playerInfos.length; i++) {
+                                if ($scope.playerInfos[i].id == updatedData.data.id) {
+                                    $scope.playerInfos[i] = updatedData.data;
+                                }
+                            }
+                        }
+                        else{
+                            for (var i = 0; i < $scope.playerInfos.length; i++) {
+                                if ($scope.playerInfos[i].player.id == updatedData.data.id) {
+                                    $scope.playerInfos[i].player = updatedData.data;
+                                }
                             }
                         }
                     }
@@ -130,12 +136,13 @@ angular.module("sportsClub").controller('managerBoardCtrl', function ($scope, $h
             });
     }
 
+
     var openPlayerModalinCreateMode = function (playerData, teamData, managerId) {
         var modalInstance = $uibModal.open({
             templateUrl: 'app/components/playerModal/playerModal.html',
             controller: 'playerModalCtrl',
             resolve: {
-                player: function () {
+                playerinfo: function () {
                     return playerData;
                 },
                 team: function () {
@@ -153,13 +160,6 @@ angular.module("sportsClub").controller('managerBoardCtrl', function ($scope, $h
             if (updatedData.new == true) {
                 $scope.playerInfos.push(updatedData.data);
             }
-            if (updatedData.edited == true) {
-                for (var i = 0; i < $scope.playerInfos.length; i++) {
-                    if ($scope.playerInfos[i].player.id == updatedData.data.id) {
-                        $scope.playerInfos[i].player = updatedData.data;
-                    }
-                }
-            }
         }, function (err) {
             $scope.handleErrors(err);
         });
@@ -169,8 +169,12 @@ angular.module("sportsClub").controller('managerBoardCtrl', function ($scope, $h
         if (playerData == null) {
             openPlayerModalinCreateMode(playerData, teamData, managerId);
         }
+        else if (teamData == null){
+            openPlayerModalinEditMode({"jerseyNumber":null,"player": playerData}, teamData, managerId);
+        }
         else{
             openPlayerModalinEditMode(playerData, teamData, managerId);
+
         }
     }
 

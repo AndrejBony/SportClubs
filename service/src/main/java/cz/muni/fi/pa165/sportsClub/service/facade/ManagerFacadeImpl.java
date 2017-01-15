@@ -30,10 +30,11 @@ public class ManagerFacadeImpl implements ManagerFacade {
 	private BeanMappingService beanMappingService;
 
 	@Override
-	public void createManager(ManagerDto m) {
+	public Long createManager(ManagerDto m) {
 		Manager managerEntity = beanMappingService.mapTo(m, Manager.class);
 		managerService.createManager(managerEntity);
 		m.setId(managerEntity.getId());
+		return m.getId();
 	}
 
 	@Override

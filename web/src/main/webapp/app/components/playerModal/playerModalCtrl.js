@@ -1,9 +1,11 @@
 "use strict";
-angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $http, $filter ,$uibModalInstance, player, team, managerId, playerTeams) {
-    if (player != null) {
-        $scope.player = angular.copy(player);
+angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $http, $filter ,$uibModalInstance, playerinfo, team, managerId, playerTeams) {
+    if (playerinfo != null) {
+        $scope.playerinfo = angular.copy(playerinfo);
     } else {
-        $scope.player = {
+        $scope.playerinfo = {
+            "jerseyNumber": null,
+            "player":{
             "id": null,
             "firstName": null,
             "lastName": null,
@@ -12,18 +14,12 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
             "password": null,
             "mobile": null,
             "weight": null,
-            "heigth": null,
+            "heigth": null}
         }
     }
 
     if (team != null) {
         $scope.team = angular.copy(team);
-    } else {
-        $scope.team = {
-            "id": null,
-            "category": null,
-            "manager": null,
-        }
     }
 
     if (managerId != null) {
@@ -37,8 +33,9 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
     $scope.close = function (updatedData) {
         $uibModalInstance.close(updatedData);
     }
+
     var validDateOfBirth = function() {
-        $scope.player.dateOfBirth = $filter('date')($scope.player.dateOfBirth, "yyyy-MM-dd");
+        $scope.playerinfo.player.dateOfBirth = $filter('date')($scope.playerinfo.player.dateOfBirth, "yyyy-MM-dd");
     }
 
     $scope.save = function () {
@@ -55,19 +52,19 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
             return;
         }
         validDateOfBirth();
-        if ($scope.player.id != null) {
-            updatePlayer($scope.player);
+        if ($scope.playerinfo.player.id != null) {
+            updatePlayer($scope.playerinfo.player);
             return;
         }
-        if ($scope.team.id != null) {
-            createPlayer($scope.player);
+        if ($scope.team != null) {
+            createPlayer($scope.playerinfo.player);
             return;
         }
-        createFreePlayer($scope.player,managerId);
+        createFreePlayer($scope.playerinfo.player,managerId);
     }
 
     var validFirstName = function () {
-        if ($scope.player.firstName == null) {
+        if ($scope.playerinfo.player.firstName == null) {
             alert("First name's field is empty");
             return false;
         }
@@ -75,7 +72,7 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
     }
 
     var validLastName = function () {
-        if ($scope.player.lastName == null) {
+        if ($scope.playerinfo.player.lastName == null) {
             alert("Last name's field is empty");
             return false;
         }
@@ -84,7 +81,7 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
 
     var validEmail = function () {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!re.test($scope.player.email)) {
+        if (!re.test($scope.playerinfo.player.email)) {
             alert("Invalid email format");
             return false;
         }
@@ -92,7 +89,7 @@ angular.module("sportsClub").controller('playerModalCtrl', function ($scope, $ht
     }
 
     var validMobile = function () {
-        if (!(/^(\+|00)?\d+$/.test($scope.player.mobile))) {
+        if (!(/^(\+|00)?\d+$/.test($scope.playerinfo.player.mobile))) {
             alert("Invalid mobile phone format");
             return false;
         }

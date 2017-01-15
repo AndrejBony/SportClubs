@@ -45,7 +45,7 @@ public class PlayerController {
 			throws TokenValidationException {
 		String token = (hsr.getHeader("Authorization")).split(" ")[1];
 		AuthUtils.authorizeRestCall(token, AUTHORIZED_ROLES);
-        playerFacade.createPlayer(player, managerId);
+        player = playerFacade.createPlayer(player, managerId);
         return player;
     }
 

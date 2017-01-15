@@ -49,7 +49,8 @@ public class TeamController {
     public final TeamDto create(@RequestBody TeamDto team, HttpServletRequest hsr) throws TokenValidationException {
         String token = (hsr.getHeader("Authorization")).split(" ")[1];
         AuthUtils.authorizeRestCall(token, AUTHORIZED_ROLES);
-        teamFacade.createTeam(team);
+        Long id = teamFacade.createTeam(team);
+        team.setId(id);
         return team;
     }
 

@@ -30,7 +30,7 @@ angular.module("sportsClub").controller('suitablePlayersModalCtrl',function($sco
             templateUrl: 'app/components/playerModal/playerModal.html',
             controller: 'playerModalCtrl',
             resolve: {
-                player: function () {
+                playerinfo: function () {
                     return null;
                 },
                 team: function () {

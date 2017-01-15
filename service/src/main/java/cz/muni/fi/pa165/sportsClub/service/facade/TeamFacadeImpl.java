@@ -38,7 +38,7 @@ public class TeamFacadeImpl implements TeamFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public void createTeam(TeamDto t) {
+    public Long createTeam(TeamDto t) {
         Team teamEntity = beanMappingService.mapTo(t, Team.class);
         if (!teamService.isCategoryOfTeamUnique(teamEntity)) {
             throw new IllegalArgumentException("Category of team is not unique between teams of manager");
@@ -47,7 +47,7 @@ public class TeamFacadeImpl implements TeamFacade {
             teamService.createTeam(teamEntity);
         }
 		t.setId(teamEntity.getId());
-
+        return t.getId();
     }
 
     @Override

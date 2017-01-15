@@ -17,7 +17,7 @@ public interface PlayerFacade {
      *
      * @param p created player
      */
-    void createPlayer(PlayerDto p, Long managerId);
+    PlayerDto createPlayer(PlayerDto p, Long managerId);
 
     /**
      * Updates player
